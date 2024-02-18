@@ -5,28 +5,33 @@
   
   <style>
     body {
-      background: linear-gradient(to right, #f06d06, #f0cb35);
+      background: linear-gradient(to right, #f00667, #f0cb35);
       font-family: sans-serif;
       text-align: center;
+     
     }
     
     .calculator {
       display: inline-block;
+      margin-bottom: 30px;
       padding: 20px; 
       border-radius: 10px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     }
-    
+    .bg{
+        background-color: rgb(219, 21, 133);
+        border-radius: 10px;
+    }
     .display {
-      width: 225px;
-      height: 50px;
-      font-size: 20px;
+      width: 500px;
+      height: 100px;
+      font-size: 40px;
       text-align: right;
       margin-bottom: 10px;
       padding: 5px;
       border-radius: 5px;
-      color: #fff;
-      background: #252d38;
+      color: #100f0f;
+      background: #d8dfe7;
     }
     
     button {
@@ -38,11 +43,12 @@
       border: none;
       box-shadow: 0 3px 0 #111;
       color: #fff;
-      background: linear-gradient(to bottom, #f06d06, #f0cb35);
+      background: linear-gradient(to bottom, #2ec1ee, #5309c3);
     }
     
     .operator {
-      color: black;
+      color: rgba(235, 4, 11, 0.851);
+      font-size: 30px;
       background: linear-gradient(to bottom, #f8f806, #d6d608);
     }
     
@@ -53,29 +59,40 @@
 <body>
 
   <div class="calculator">
+    <h1>JavaScript Calculator</h1>
     <input type="text" class="display" disabled />
     
-    <button>7</button>
-    <button>8</button>
-    <button>9</button>
+    
+</div>
+<div class="bg">
+    <div >
     <button class="operator">+</button>
     
+   
+    <button class="operator">-</button>
+     
+    
+    <button class="operator">*</button>
+    <button class="operator">/</button>
+    
+    
+    <button>.</button>
+    
+    <button id="clear">C</button>
+    <button id="eq">=</button>
+</div>
+
+  <div class="bg">
+
+    <button>0</button>  <button>1</button>
+    <button>2</button>
+    <button>3</button>
     <button>4</button>
     <button>5</button> 
     <button>6</button>
-    <button class="operator">-</button>
-     
-    <button>1</button>
-    <button>2</button>
-    <button>3</button>
-    <button class="operator">*</button>
-    
-    <button>0</button>
-    <button>.</button>
-    <button class="operator">/</button>
-    <button id="clear">C</button>
-    <button id="eq">=</button>
-
+    <button>7</button>
+    <button>8</button>
+    <button>9</button>
   </div>
 
   <script>
@@ -102,7 +119,7 @@ buttons.forEach(button => {
       // Operator pressed
       operator = value;
       firstValue = parseFloat(display.value);
-      display.value = '';
+      display.value = firstValue;
       
     } else if (value == 'C') {
       
@@ -116,6 +133,7 @@ buttons.forEach(button => {
 
       // Equals button pressed 
       secondValue = parseFloat(display.value);
+      display.value=operator;
       
       switch(operator) {
         case '+':
