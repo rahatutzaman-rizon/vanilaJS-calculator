@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript Calculator</title>
+  
+  <style>
+    body {
+      background: linear-gradient(to right, #f06d06, #f0cb35);
+      font-family: sans-serif;
+      text-align: center;
+    }
+    
+    .calculator {
+      display: inline-block;
+      padding: 20px; 
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    }
+    
+    .display {
+      width: 225px;
+      height: 50px;
+      font-size: 20px;
+      text-align: right;
+      margin-bottom: 10px;
+      padding: 5px;
+      border-radius: 5px;
+      color: #fff;
+      background: #252d38;
+    }
+    
+    button {
+      width: 60px;
+      height: 60px;
+      font-size: 20px;
+      margin: 5px; 
+      border-radius: 50%;
+      border: none;
+      box-shadow: 0 3px 0 #111;
+      color: #fff;
+      background: linear-gradient(to bottom, #f06d06, #f0cb35);
+    }
+    
+    .operator {
+      color: black;
+      background: linear-gradient(to bottom, #f8f806, #d6d608);
+    }
+    
+  </style>
+  
+</head>
+
+<body>
+
+  <div class="calculator">
+    <input type="text" class="display" disabled />
+    
+    <button>7</button>
+    <button>8</button>
+    <button>9</button>
+    <button class="operator">+</button>
+    
+    <button>4</button>
+    <button>5</button> 
+    <button>6</button>
+    <button class="operator">-</button>
+     
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button class="operator">*</button>
+    
+    <button>0</button>
+    <button>.</button>
+    <button class="operator">/</button>
+    <button id="clear">C</button>
+    <button id="eq">=</button>
+
+  </div>
+
+  <script>
+
+// Get references to the display and buttons
+const display = document.querySelector('.display');
+const buttons = document.querySelectorAll('button');
+
+// Store operator and values 
+let firstValue = 0;
+let operator = '';
+let secondValue = ''; 
+
+// Add click event to each button
+buttons.forEach(button => {
+
+  button.addEventListener('click', () => {
+
+    // Get the clicked value 
+    const value = button.innerText;
+    
+    if (button.classList.contains('operator')) {
+    
+      // Operator pressed
+      operator = value;
+      firstValue = parseFloat(display.value);
+      display.value = '';
+      
+    } else if (value == 'C') {
+      
+      // Clear button pressed
+      firstValue = 0;
+      operator = '';
+      secondValue = '';
+      display.value = '';
+      
+    } else if (value == '=') {
+
+      // Equals button pressed 
+      secondValue = parseFloat(display.value);
+      
+      switch(operator) {
+        case '+':
+          display.value = firstValue + secondValue;
+          break;
+        case '-':  
+          display.value = firstValue - secondValue;
+          break;
+        case '*':
+          display.value = firstValue * secondValue;
+          break;
+        case '/':
+          display.value = firstValue / secondValue;
+          break;
+        default:
+          return;  
+      }
+      
+      // Reset operator and values
+      firstValue = parseFloat(display.value);
+      secondValue = '';
+      operator = '';
+      
+    } else {
+
+      // Number button pressed
+      if (!operator) {
+        firstValue = parseFloat(display.value + value);
+        display.value = firstValue;
+      } else {  
+        secondValue += value;
+        display.value = secondValue; 
+      }
+      
+    }
+
+  });
+
+});
+
+
+  </script>
+
+</body>
+</html>
